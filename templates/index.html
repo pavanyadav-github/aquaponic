@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquaponic Water Quality Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            text-align: center;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.2);
+        }
+        input {
+            width: 80%;
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .improvement {
+            color: #007bff;
+            font-size: 16px;
+            margin-top: 10px;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Aquaponic Water Quality Prediction</h2>
+    <form action="/predict" method="post">
+        <input type="text" name="ph" placeholder="pH" required><br>
+        <input type="text" name="do" placeholder="Dissolved Oxygen" required><br>
+        <input type="text" name="temp" placeholder="Temperature" required><br>
+        <input type="text" name="nh3" placeholder="Ammonia" required><br>
+        <input type="text" name="no2" placeholder="Nitrite" required><br>
+        <input type="text" name="no3" placeholder="Nitrate" required><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+    {% endif %}
+
+    {% if improvement_text %}
+        <div class="improvement">
+            <strong>Improvement Suggestions:</strong><br>
+            {{ improvement_text | safe }}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
